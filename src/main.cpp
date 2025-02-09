@@ -1,41 +1,42 @@
 #include <iostream>
 #include "livre.h"
+
 using namespace std;
 
-int main () {
+int main() {
+    int choix, id = 0, size = 0;
+    Livre* tab_livres = nullptr;
+    bool actif = true;
 
-  int choix, id = 0, size = 0;
-  Livre *tab_livres = nullptr;
-  
+    cout << "------------------------------------------------------------------------------- " << "\n";
+    cout << "------------------------------------------------------------------------------- " << "\n";
+    cout << "----------------------------  GESTION BIBLIOTHEQUE ---------------------------- " << "\n";
+    cout << "------------------------------------------------------------------------------- " << "\n";
+    cout << "------------------------------------------------------------------------------- " << "\n";
 
-  cout << "------------------------------------------------------------------------------- " << "\n";
-  cout << "------------------------------------------------------------------------------- " << "\n";
-  cout << "----------------------------  GESTION BIBLIOTHEQUE ---------------------------- " << "\n";
-  cout << "------------------------------------------------------------------------------- " << "\n";
-  cout << "------------------------------------------------------------------------------- " << "\n";
+    do {
+      if(Menu(choix) == 0){
+          switch (choix) {
+            case 2:
+              if (AjouterLivre(&tab_livres, size, id)) {
+                cout << "Ajout avec succes !\n";
+              } else {
+                cout << "Erreur lors de l'ajout du livre !\n";
+              }
+              break; 
+            case 7:
+              cout << "Good night !\n";
+              actif = false;
+              break;
+            default:
+              cout << "Veuillez choisir une option valide !\n";
+              break;
+          }
+        }
+    } while (actif);
 
-  cout << "Afficher livres (taper 0) : " << "\n";
-  cout << "Afficher un livre (taper 1) : " << "\n";
-  cout << "Ajouter un livre (taper 2) : " << "\n";
-  cout << "Modifier une information d'un livre (taper 3) : " << "\n";
-  cout << "Modifier un livre complet (taper 4) : " << "\n";
-  cout << "Supprimer un livre (taper 5) : " << "\n";
-  cout << "Supprimer tout les livres (taper 6) : " << "\n";
-  cout << "------------------------------------------------- " << "\n";
-  cout << "=> votre choix : ";
-  cin >> choix;
+    // Nettoyage mémoire (si tab_livres a été alloué)
+    delete[] tab_livres;
 
-
-  switch (choix)
-  {
-  case 2:
-    if(AjouterLivre(tab_livres, size, id)){
-      cout << "Ajout avec succes !" << "\n";
-    };
-    break;
-  default:
-    cout << "veuiller chosir !";
-    break;
-  }
-
+    return 0;
 }
